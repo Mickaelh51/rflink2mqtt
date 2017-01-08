@@ -13,4 +13,6 @@ String rfLinkTx "[%s]" {mqtt=">[mymosquitto:rflink/tx:command:*:default]"}
 rfLinkTx.sendCommand("10;EV1527;09d4c0;03;" + lamp1Buttonrflink.state + ";")
 ```
 
-Help: https://community.openhab.org/t/rflink-binding/7863/14
+Help: 
+- https://community.openhab.org/t/rflink-binding/7863/14
+- https://github.com/aequitas/python-rflink

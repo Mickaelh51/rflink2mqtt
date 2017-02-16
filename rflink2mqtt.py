@@ -134,7 +134,7 @@ def on_message(client, userdata, message):
 
 def decode_packet(packet):
 	#print ("DEBUG: " + packet)
-	logger.debug(packet)
+	logger.info(packet)
 	try:
 		node_id, _, protocol, attrs = x.split(DELIM, 3)
 	except ValueError:
@@ -185,8 +185,9 @@ client.on_message = on_message
 client.loop_start()
 
 while True:
-        x=ser.readline()
-        x = x.strip("\r\n")
-	decode_packet(x)
-	#print ("Received from RFLINK " + x)
-        #client.publish("rflink/rx", x, 0)
+    x=ser.readline()
+    x = x.strip("\r\n")
+    try:
+        decode_packet(x)
+    except ValueError:
+        logger.info("Error in decode packet")

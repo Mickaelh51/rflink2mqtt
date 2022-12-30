@@ -33,9 +33,6 @@ https://hub.docker.com/r/mickaelh51/rflink2mqtt
 
 ```
 ## Example with openHAB
-```
-
-```
 ### Receive data:
 ```
 Number I_Temp_bedroom 		"Bedroom temperature [%.1f °C]"	<temperature>	(G_Bedroom ,G_All_Sensors)	{ mqtt="<[mymosquitto:rflink/temperature/2df1:state:default]"}

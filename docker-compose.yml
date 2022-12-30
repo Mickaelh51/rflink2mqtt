@@ -1,0 +1,19 @@
+version: '3.3'
+
+networks:
+  swarm-homeassistant:
+    external: true
+
+services:
+  rflink2mqtt:
+    image: mickaelh51/rflink2mqtt:latest
+    container_name: rflink2mqtt
+    hostname: rflink2mqtt
+    devices:
+      - "/dev/ttyACM2:/dev/ttyACM2"
+    environment:
+      - "MQTT_SERVER=mosquitto"
+      - "USB_INTERFACE=/dev/ttyACM2"
+    restart: always
+    networks:
+      - swarm-homeassistant

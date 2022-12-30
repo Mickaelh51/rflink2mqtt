@@ -1,4 +1,0 @@
-#cfg file in /etc/monit/conf.d/
-check process rflink2mqtt with pidfile /var/run/rflink2mqtt.pid
-        start = "/etc/init.d/rflink2mqtt start"
-        stop = "/etc/init.d/rflink2mqtt stop"

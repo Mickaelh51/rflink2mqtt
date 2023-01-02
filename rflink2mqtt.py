@@ -116,14 +116,14 @@ def on_connect(client, userdata, flags, rc):
   logger.info(f"subscribed to: rflink2/tx")
 
 def on_message(client, userdata, message):
-	logger.info("Send to RFLINK " + str(message.payload.decode("utf-8")))
+	logger.info(f"Send to RFLINK " + str(message.payload.decode("utf-8")))
 	ser.write(message.payload + "\r\n".encode('utf-8'))
 
 def decode_packet(packet):
 	try:
 		node_id, _, protocol, attrs = x.split(DELIM, 3)
 	except ValueError:
-		logger.error("Could not split line: %s", packet)
+		logger.error(f"Could not split line: {packet}")
 		return
 
 	logger.info(f"node_id:{node_id}, protocol: {protocol}")
@@ -142,14 +142,14 @@ def decode_packet(packet):
 		else:
 			if switch:
 				client.publish("rflink/"+name+"/"+id+"/"+switch, value, 0)
-				logger.info("rflink/%s/%s/%s / value: %s") % (name, id, switch, value)
+				logger.info("rflink/%s/%s/%s / value: %s" % (name, id, switch, value))
 			else:
 				client.publish("rflink/"+name+"/"+id, value, 0)
-				logger.info("rflink/%s/%s / value: %s") % (name, id, value)
+				logger.info("rflink/%s/%s / value: %s" % (name, id, value))
 		
 	if find == 0:
 		client.publish("rflink/rx", packet, 0)
-		logger.error("not find protocol of other: " + packet)
+		logger.error(f"not find protocol of other: {packet}")
 		
 	return 
 

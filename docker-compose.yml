@@ -13,6 +13,7 @@ services:
       - "/dev/ttyACM2:/dev/ttyACM2"
     environment:
       - "MQTT_SERVER=mosquitto"
+      - "MQTT_PORT=1883"
       - "USB_INTERFACE=/dev/ttyACM2"
     restart: always
     networks:

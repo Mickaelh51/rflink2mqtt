@@ -17,9 +17,12 @@ logger.addHandler(consoleHandler)
 # Get environment variables
 USB_INTERFACE = os.environ.get('USB_INTERFACE')
 MQTT_SERVER = os.environ.get('MQTT_SERVER')
+MQTT_PORT = os.environ.get('MQTT_PORT', 1883)
+MQTT_USERNAME = os.environ.get('MQTT_USERNAME', None)
+MQTT_PWD = os.environ.get('MQTT_PWD', None)
+
 
 serialdev = USB_INTERFACE
-broker = MQTT_SERVER
 DELIM = ';'
 
 def signed_to_float(hex):
@@ -175,7 +178,9 @@ if __name__ == '__main__':
 
 
   client = mqtt.Client()
-  client.connect(broker, 1883)
+  if MQTT_USERNAME and MQTT_PWD:
+    client.username_pw_set(MQTT_USERNAME, MQTT_PWD)
+  client.connect(MQTT_SERVER, MQTT_PORT)
   client.on_connect = on_connect
   client.on_message = on_message
   client.loop_start()

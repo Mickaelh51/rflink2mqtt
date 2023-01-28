@@ -16,6 +16,7 @@ rflink -- USB --> container rflink2mqtt -- swarm-network --> Home Assistant (MQT
 ```
 docker-compose up
 ```
+Use with login and password, please add variables MQTT_USERNAME and MQTT_PWD in docker-compose.yml
 https://hub.docker.com/r/mickaelh51/rflink2mqtt
 ## Example with HomeAssistant
 

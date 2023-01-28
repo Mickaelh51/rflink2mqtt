@@ -49,5 +49,6 @@ rfLinkTx.sendCommand("10;EV1527;09d4c0;03;" + lamp1Buttonrflink.state + ";")
 - https://github.com/aequitas/python-rflink
 
 ## Updates
+- 28-01-2023: Add support login and password
 - 30-12-2022: Update script with python 3.9
 - 30-12-2022: Add script into docker container

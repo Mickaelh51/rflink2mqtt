@@ -114,9 +114,12 @@ BFORECAST_LOOKUP = {
 }
 
 def on_connect(client, userdata, flags, rc):
-  logger.info(f"Connected with result to host:{MQTT_SERVER} , code:{rc}")
-  client.subscribe("rflink2/tx",0)
-  logger.info(f"subscribed to: rflink2/tx")
+  if rc == 0:
+    logger.info(f"Connected to host:{MQTT_SERVER} , code:{rc}")
+    client.subscribe("rflink2/tx",0)
+    logger.info(f"subscribed to: rflink2/tx")
+  else:
+     logger.error(f"Not connected to host:{MQTT_SERVER} , code:{rc}")
 
 def on_message(client, userdata, message):
 	logger.info(f"Send to RFLINK " + str(message.payload.decode("utf-8")))
@@ -180,7 +183,7 @@ if __name__ == '__main__':
   client = mqtt.Client()
   if MQTT_USERNAME and MQTT_PWD:
     client.username_pw_set(MQTT_USERNAME, MQTT_PWD)
-  client.connect(MQTT_SERVER, MQTT_PORT)
+  client.connect(MQTT_SERVER, int(MQTT_PORT))
   client.on_connect = on_connect
   client.on_message = on_message
   client.loop_start()

@@ -1,0 +1,24 @@
+version: '3.3'
+
+services:
+  rflink2mqtt:
+    image: mickaelh51/rflink2mqtt:latest
+    container_name: rflink2mqtt
+    hostname: rflink2mqtt
+    devices:
+      - "/dev/ttyUSB0:/dev/ttyACM2"
+    #volumes:
+    #  - "./../rflink2mqtt.py:/usr/src/app/rflink2mqtt.py"
+    environment:
+      - "MQTT_SERVER=mosquitto"
+      - "MQTT_PORT=1883"
+      - "USB_INTERFACE=/dev/ttyACM2"
+      - "MQTT_USERNAME=admin"
+      - "MQTT_PWD=password2"
+    restart: always
+
+  mosquitto:
+    image: eclipse-mosquitto:latest
+    volumes:
+      - ./mosquitto.conf:/mosquitto/config/mosquitto.conf
+      - ./password.txt:/mosquitto/config/password.txt
